@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\ModelHelpers;
+use App\Models\Article;
 
 class User extends Authenticatable
 {
@@ -45,6 +46,6 @@ class User extends Authenticatable
     ];
 
     public function articles() : HasMany {
-        return $this->hasMany(Article::class, 'author_id')
+        return $this->hasMany(Article::class, 'author_id');
     }
 }

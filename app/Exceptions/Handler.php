@@ -41,8 +41,22 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
+        /*$this->reportable(function (Throwable $e) {
             //
+        });*/
+
+        $this->renderable(function (NotFoundHttpException $e, $request){
+            if($request->is('api/*')){
+                return response()->json([
+                    'error' => [
+                        'message' => 'Resource Not Found',
+                        'type' => 'NotFoundHttpException',
+                        'code' => '4405',
+                        'link' => 'doclinks.me/details/error',
+                        'status_code' => (string)$e->getStatusCode(),
+                    ],
+                ], 404);
+            }
         });
     }
 }
